@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<style>
+		body {
+			font-family: sans-serif;
+		}
+
+		.monospace {
+			font-family: monospace;
+		}
+	</style>
+</head>
+<body>
+	<h1>train-replicants' Replicant graphic</h1>
+	<p>Runner: <span id="runnerName"></span></p>
+
+	<h2>Speedrun.com検索結果</h2>
+	<ul id="speedruncomUsers"></ul>
+
+	<script>
+		nodecg.Replicant('runner').on('change', (newVal) => {
+			document.getElementById('runnerName').textContent = newVal;
+		});
+
+		nodecg.Replicant('speedruncomUsers').on('change', (newVal) => {
+			const speedruncomUserList = document.getElementById('speedruncomUsers');
+
+			while (speedruncomUserList.firstChild) {
+				speedruncomUserList.removeChild(speedruncomUserList.firstChild);
+			}
+
+			const speedruncomUserNodes = newVal.forEach((speedruncomUser) => {
+				const userElement = document.createElement('li');
+				userElement.innerHTML = `
+					<a href="${speedruncomUser.weblink}" target="_blank">${speedruncomUser.names.international}[${speedruncomUser.id}]</a>
+				`;
+
+				speedruncomUserList.append(userElement);
+			});
+
+		})
+	</script>
+</body>
+</html>

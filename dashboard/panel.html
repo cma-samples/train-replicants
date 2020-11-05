@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<style>
+		.monospace {
+			font-family: monospace;
+		}
+	</style>
+</head>
+<body>
+	<label for="runnerName">走者名</label>
+	<input type="text" name="runner-name" id="runnerName" />
+	<button id="updateRunnerNameBtn">更新</button>
+	<button id="searchSpeedruncomUserBtn">Speedrun.comからユーザーを検索</button>
+
+	<script>
+		document.getElementById('updateRunnerNameBtn').addEventListener('click', () => {
+			const runnerName = document.getElementById('runnerName').value;
+			nodecg.Replicant('runner').value = runnerName;
+		});
+
+		document.getElementById('searchSpeedruncomUserBtn').addEventListener('click', () => {
+			nodecg.sendMessage('searchSpeedruncomUser');
+		})
+
+		// changeイベントを検知することで他のブラウザからの変更も反映する
+		nodecg.Replicant('runner').on('change', (newVal) => {
+			document.getElementById('runnerName').value = newVal;
+		});
+
+		// 初期表示時のみReplicantの値を取得する場合は以下
+		// nodecg.readReplicant('runner', (runnerName) => {
+		// 	document.getElementById('runnerName').value = runnerName;
+		// });
+
+	</script>
+</body>
+</html>
