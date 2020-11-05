@@ -2,6 +2,8 @@
 
 Replicant解説記事用に作成したNodeCGのbundleです。
 
+[https://zenn.dev/cma2819/articles/nodecg-implements-replicant](https://zenn.dev/cma2819/articles/nodecg-implements-replicant)
+
 ## Installation
 
 ```
